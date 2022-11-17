@@ -1,4 +1,4 @@
-# jds-fe-onboarding-mini-task
+# ITDEV FE Onboarding Mini Task
 
 ## Project setup
 ```
