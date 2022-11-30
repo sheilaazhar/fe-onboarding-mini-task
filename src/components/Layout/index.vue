@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-lg min-h-screen mx-auto shadow-md">
-    <div class="bg-[#FEFEFE]">
+    <div class="bg-white">
       <slot name="content" />
     </div>
   </div>
