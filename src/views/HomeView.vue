@@ -18,6 +18,7 @@
             <SearchIcon class="w-5 h-5" />
           </div>
           <input
+            id="pokemon_name"
             type="text"
             name="search"
             placeholder="Pokemon Name"
