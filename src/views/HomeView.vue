@@ -29,10 +29,16 @@
         <button
           type="button"
           class="bg-white hover:bg-emerald-500 ring-2 ring-emerald-500 py-2 px-3 rounded-lg"
+          @click="openFilter"
         >
           <FilterIcon class="w-5 h-5" />
         </button>
       </form>
+      <ModalFilter
+        v-show="filterOpen"
+        @close="closeFilter"
+        @inputFilter="handleFilter"
+      />
     </template>
   </BaseLayout>
 </template>
@@ -40,6 +46,7 @@
 <script>
 import BaseLayout from '@/components/Layout/index.vue';
 import { SearchIcon, FilterIcon } from '@vue-hero-icons/outline';
+import ModalFilter from '@/components/Filter/index.vue';
 
 export default {
   name: 'HomeView',
@@ -47,6 +54,24 @@ export default {
     BaseLayout,
     SearchIcon,
     FilterIcon,
+    ModalFilter,
+  },
+  data() {
+    return {
+      filterOpen: false,
+      searchName: '',
+    };
+  },
+  methods: {
+    openFilter() {
+      this.filterOpen = true;
+    },
+    closeFilter() {
+      this.filterOpen = false;
+    },
+    handleFilter(value) {
+      this.searchName = value;
+    },
   },
 };
 </script>
