@@ -39,7 +39,25 @@
             <p class="text-sm font-medium text-gray-700">
               Types
             </p>
-            <!-- List of types still in progress -->
+            <div class="flex flex-wrap mt-3">
+              <div
+                v-for="type in types"
+                :key="type.id"
+              >
+                <label
+                  :for="type.name"
+                  class="inline-flex items-center rounded-lg cursor-pointer mr-2 mb-2 pl-2 ring-1 ring-transparent transition ease border border-emerald-200 hover:ring-offset-2 hover:ring-emerald-200 bg-green-100"
+                >
+                  <input
+                    :id="type.name"
+                    v-model="filterTypes"
+                    type="checkbox"
+                    :value="type.id"
+                  >
+                  <span class="px-4 py-[4px] text-sm leading-5 font-medium text-black capitalize"> {{ type.name }} </span>
+                </label>
+              </div>
+            </div>
           </div>
         </div>
         <div class="mt-5">
@@ -58,6 +76,7 @@
 <script>
 import BaseModal from '@/components/Modal/index.vue';
 import { SearchIcon, FilterIcon, XIcon } from '@vue-hero-icons/outline';
+import axios from 'axios';
 
 export default {
   name: 'ModalFilter',
@@ -70,7 +89,21 @@ export default {
   data() {
     return {
       name: '',
+      types: [],
+      filterTypes: [],
     };
+  },
+  mounted() {
+    axios
+      .get(`${process.env.VUE_APP_API_ENDPOINT}/type`)
+      .then((response) => {
+        response.data.results.forEach((type) => {
+          type.id = type.url.split('/')
+            .filter((part) => !!part).pop();
+          this.types.push(type);
+        });
+      })
+      .catch((error) => console.log(error)); /* eslint-disable-line no-console */
   },
   methods: {
     close() {
