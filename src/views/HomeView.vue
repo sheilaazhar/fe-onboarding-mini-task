@@ -65,7 +65,7 @@ import BaseLayout from '@/components/Layout/index.vue';
 import { SearchIcon, FilterIcon } from '@vue-hero-icons/outline';
 import ModalFilter from '@/components/Filter/index.vue';
 import axios from 'axios';
-import CardPokemon from '@/components/Card Pokemon/index.vue';
+import CardPokemon from '@/components/CardPokemon/index.vue';
 
 export default {
   name: 'HomeView',
@@ -81,14 +81,13 @@ export default {
       filterOpen: false,
       searchName: '',
       pokemons: [],
-      apiUrl: 'https://pokeapi.co/api/v2/pokemon',
       nextUrl: '',
       currentUrl: '',
       countData: '',
     };
   },
   created() {
-    this.currentUrl = this.apiUrl;
+    this.currentUrl = `${process.env.VUE_APP_API_ENDPOINT}/pokemon`;
     this.fetchData();
   },
   mounted() {

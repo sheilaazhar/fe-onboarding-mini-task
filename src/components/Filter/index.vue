@@ -95,7 +95,7 @@ export default {
   },
   mounted() {
     axios
-      .get('https://pokeapi.co/api/v2/type')
+      .get(`${process.env.VUE_APP_API_ENDPOINT}/type`)
       .then((response) => {
         response.data.results.forEach((type) => {
           type.id = type.url.split('/')
