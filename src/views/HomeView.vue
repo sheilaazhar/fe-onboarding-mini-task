@@ -3,7 +3,7 @@
     <template #content>
       <header class="px-6 pt-12">
         <h1 class="mb-2 font-semibold text-4xl">
-          Pokedex
+          Pokemon Sheila
         </h1>
         <p class="text-md">
           Find your favorite Pokemon!
