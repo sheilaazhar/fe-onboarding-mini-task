@@ -9,7 +9,10 @@
           Find your favorite Pokemon!
         </p>
       </header>
-      <form class="flex space-x-2 items-center justify-between px-6 py-4 bg-gray-50 bg-opacity-50 sticky top-0 z-10">
+      <form
+        class="flex space-x-2 items-center justify-between px-6 py-4 bg-gray-50 bg-opacity-50 sticky top-0 z-10"
+        @submit.prevent="searchName"
+      >
         <label
           for="pokemon_name"
           class="block flex-1 relative"
@@ -19,6 +22,7 @@
           </div>
           <input
             id="pokemon_name"
+            v-model="search"
             type="text"
             name="search"
             placeholder="Pokemon Name"
@@ -48,7 +52,11 @@
             v-for="pokemon in pokemons"
             :key="pokemon.id"
           >
-            <CardPokemon :pokemon="pokemon" />
+            <CardPokemon
+              :id="pokemon.id"
+              :name="pokemon.name"
+              :types="pokemon.types"
+            />
           </div>
           <div
             id="scroll-trigger"
@@ -79,7 +87,8 @@ export default {
   data() {
     return {
       filterOpen: false,
-      searchName: '',
+      search: '',
+      name: '',
       pokemons: [],
       nextUrl: '',
       currentUrl: '',
@@ -88,25 +97,54 @@ export default {
   },
   created() {
     this.currentUrl = `${process.env.VUE_APP_API_ENDPOINT}/pokemon`;
-    this.fetchData();
+    this.getPokemon();
   },
   mounted() {
     this.scrollTrigger();
   },
   methods: {
-    fetchData() {
+    getPokemon() {
+      if (this.search === '') {
+        axios
+          .get(this.currentUrl)
+          .then((response) => {
+            this.nextUrl = response.data.next;
+            this.countData = response.data.count;
+            response.data.results.forEach((pokemon) => {
+              this.getPokemonType(pokemon);
+            });
+          })
+          .catch((error) => console.log(error)); /* eslint-disable-line no-console */
+      }
+    },
+    getPokemonType(pokemon) {
       axios
-        .get(this.currentUrl)
-        .then((response) => {
-          this.nextUrl = response.data.next;
-          this.countData = response.data.count;
-          response.data.results.forEach((pokemon) => {
-            pokemon.id = pokemon.url.split('/')
-              .filter((part) => !!part).pop();
-            this.pokemons.push(pokemon);
-          });
+        .get(pokemon.url)
+        .then((res) => {
+          pokemon.types = res.data.types;
+          pokemon.id = pokemon.url.split('/')
+            .filter((part) => !!part).pop();
+          this.pokemons.push(pokemon);
         })
         .catch((error) => console.log(error)); /* eslint-disable-line no-console */
+    },
+    searchName() {
+      if (this.search !== '') {
+        axios
+          .get(`${process.env.VUE_APP_API_ENDPOINT}/pokemon/${this.search}`)
+          .then((response) => {
+            this.pokemons = [];
+            this.pokemons.push(response.data);
+            this.countData = this.pokemons.length;
+          })
+          .catch((error) => {
+            if (error.response.status === 404) {
+              alert(`${this.search} is doesn't exist`); /* eslint-disable-line no-alert */
+            }
+          });
+      } else {
+        window.location.reload();
+      }
     },
     openFilter() {
       this.filterOpen = true;
@@ -115,7 +153,7 @@ export default {
       this.filterOpen = false;
     },
     handleFilter(value) {
-      this.searchName = value;
+      this.name = value;
     },
     scrollTrigger() {
       const observer = new IntersectionObserver((entries) => {
@@ -129,7 +167,7 @@ export default {
     },
     next() {
       this.currentUrl = this.nextUrl;
-      this.fetchData();
+      this.getPokemon();
     },
   },
 };
