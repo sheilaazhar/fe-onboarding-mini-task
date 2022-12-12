@@ -46,7 +46,7 @@
               >
                 <label
                   :for="type.name"
-                  class="inline-flex items-center rounded-lg cursor-pointer mr-2 mb-2 pl-2 ring-1 ring-transparent transition ease border border-emerald-200 hover:ring-offset-2 hover:ring-emerald-200 bg-green-100"
+                  :class="'inline-flex items-center rounded-lg cursor-pointer mr-2 mb-2 pl-2 ring-1 ring-transparent transition ease border border-emerald-200 hover:ring-offset-2 bg-gray-700 hover:ring-emerald-200 '+type.name"
                 >
                   <input
                     :id="type.name"
@@ -54,7 +54,7 @@
                     type="checkbox"
                     :value="type.id"
                   >
-                  <span class="px-4 py-[4px] text-sm leading-5 font-medium text-black capitalize"> {{ type.name }} </span>
+                  <span class="px-4 py-[4px] text-sm leading-5 font-medium text-white capitalize"> {{ type.name }} </span>
                 </label>
               </div>
             </div>
