@@ -1,3 +1,43 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.bg-grass {background:rgb(105, 205, 135) !important;}
+.bg-poison {background:rgb(138, 103, 154) !important;}
+.bg-water {background:rgb(108, 176, 221) !important;}
+.bg-dragon {background:rgb(55, 41, 77) !important;}
+.bg-ice {background:rgb(163, 223, 250) !important;}
+.bg-flying {background:rgb(197, 234, 255) !important;}
+.bg-fire {background:rgb(235, 177, 112) !important;}
+.bg-ghost {background:rgb(80, 70, 86) !important;}
+.bg-fighting {background:rgb(162, 105, 105) !important;}
+.bg-normal {background:rgb(149, 149, 149) !important;}
+.bg-psychic {background:rgb(225, 127, 255) !important;}
+.bg-bug {background:rgb(116, 138, 89) !important;}
+.bg-dark {background:rgb(158, 158, 158) !important;}
+.bg-steel {background:rgb(116, 116, 116) !important;}
+.bg-fairy {background:rgb(254, 212, 249) !important;}
+.bg-electric {background:rgb(192, 182, 137) !important;}
+.bg-rock {background:rgb(129, 136, 141) !important;}
+.bg-ground {background:rgb(151, 124, 124) !important;}
+.bg-unknown {background:rgb(158, 159, 160) !important;}
+
+.grass {background:rgb(3, 139, 44) !important;}
+.poison {background:rgb(74, 7, 105) !important;}
+.water {background:rgb(8, 135, 219) !important;}
+.dragon {background:rgb(27, 2, 68) !important;}
+.ice {background:rgb(78, 199, 255) !important;}
+.flying {background:rgb(102, 168, 206) !important;}
+.fire {background:rgb(238, 135, 17) !important;}
+.ghost {background:rgb(74, 52, 87) !important;}
+.fighting {background:rgb(122, 0, 0) !important;}
+.normal {background:rgb(67, 67, 67) !important;}
+.psychic {background:rgb(195, 0, 255) !important;}
+.bug {background:rgb(52, 87, 6) !important;}
+.dark {background:rgb(43, 43, 43) !important;}
+.steel {background:rgb(116, 116, 116) !important;}
+.fairy {background:rgb(186, 112, 176) !important;}
+.electric {background:rgb(147, 127, 11) !important;}
+.rock {background:rgb(88, 95, 100) !important;}
+.ground {background:rgb(92, 70, 70) !important;}
+.unknown {background:rgb(138, 138, 138) !important;}
