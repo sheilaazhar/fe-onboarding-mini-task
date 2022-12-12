@@ -4,8 +4,8 @@
       <span class="text-xs text-black">#{{ id }}</span>
     </div>
     <img
-      :src="imageUrl + id + '.png'"
-      :alt="name + ' image'"
+      :src="imageSource"
+      :alt="alt"
       height="140"
       width="140"
       class="h-auto w-36"
@@ -47,6 +47,14 @@ export default {
       imageUrl:
         'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/',
     };
+  },
+  computed: {
+    imageSource() {
+      return `${this.imageUrl}${this.id}.png`;
+    },
+    alt() {
+      return `${this.name} image`;
+    },
   },
 };
 </script>
