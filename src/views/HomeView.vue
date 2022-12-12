@@ -28,6 +28,7 @@
             placeholder="Pokemon Name"
             aria-label="Search Pokemon Name"
             class="pr-3 pl-10 py-2 bg-emerald-100 placeholder-gray-500 text-black rounded-lg border-none focus:ring-emerald-500 focus:ring-2 w-full"
+            @keyup="searchName"
           >
         </label>
         <button
@@ -104,7 +105,7 @@ export default {
   },
   methods: {
     getPokemon() {
-      if (this.search === '') {
+      if (this.search === '' && this.name === '') {
         axios
           .get(this.currentUrl)
           .then((response) => {
@@ -130,18 +131,8 @@ export default {
     },
     searchName() {
       if (this.search !== '') {
-        axios
-          .get(`${process.env.VUE_APP_API_ENDPOINT}/pokemon/${this.search}`)
-          .then((response) => {
-            this.pokemons = [];
-            this.pokemons.push(response.data);
-            this.countData = this.pokemons.length;
-          })
-          .catch((error) => {
-            if (error.response.status === 404) {
-              alert(`${this.search} is doesn't exist`); /* eslint-disable-line no-alert */
-            }
-          });
+        this.pokemons = this.pokemons.filter((pokemon) => pokemon.name.toLowerCase().match(this.search));
+        this.countData = this.pokemons.length;
       } else {
         window.location.reload();
       }
@@ -152,8 +143,17 @@ export default {
     closeFilter() {
       this.filterOpen = false;
     },
-    handleFilter(value) {
-      this.name = value;
+    handleFilter(...value) {
+      this.name = value[0].name;
+      // console.log(value);
+      // console.log(value[0].name);
+      // console.log(value[0].types[0]);
+      if (value[0].name !== '' || value[0].types !== '') {
+        this.pokemons = this.pokemons.filter((pokemon) => pokemon.name.toLowerCase().match(value[0].name));
+        this.countData = this.pokemons.length;
+      } else {
+        window.location.reload();
+      }
     },
     scrollTrigger() {
       const observer = new IntersectionObserver((entries) => {
