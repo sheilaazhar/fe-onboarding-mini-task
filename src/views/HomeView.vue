@@ -27,6 +27,7 @@
             placeholder="Pokemon Name"
             aria-label="Search Pokemon Name"
             class="pr-3 pl-10 py-2 bg-emerald-100 placeholder-gray-500 text-black rounded-lg border-none focus:ring-emerald-500 focus:ring-2 w-full"
+            @keypress.enter="searchName"
           >
         </label>
         <button
@@ -182,6 +183,9 @@ export default {
     },
     closeFilter() {
       this.filterOpen = false;
+    },
+    searchName() {
+      this.filterResult = '';
     },
     async handleFilter(value) {
       this.typeResult = [];
