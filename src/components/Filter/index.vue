@@ -91,7 +91,6 @@ export default {
       name: '',
       types: [],
       filterTypes: [],
-      filter: {},
     };
   },
   mounted() {
@@ -111,11 +110,11 @@ export default {
       this.$emit('close');
     },
     onSubmit() {
-      this.filter = {
+      const filterCriteria = {
         name: this.name,
         types: this.filterTypes,
       };
-      this.$emit('inputFilter', this.filter);
+      this.$emit('inputFilter', filterCriteria);
       this.$emit('close');
     },
   },
