@@ -106,7 +106,7 @@ export default {
     dataPokemons() {
       let dataPokemons = this.pokemons;
       if (this.search) {
-        dataPokemons = this.allPokemons.filter((pokemon) => pokemon.name.toLowerCase().match(this.search));
+        dataPokemons = this.allPokemons.filter((pokemon) => pokemon.name.toLowerCase().match(this.search.toLowerCase()));
       }
       if (this.filterResult) {
         dataPokemons = this.filterResult;
@@ -188,7 +188,7 @@ export default {
       this.filterResult = '';
       if (value.name !== '' || value.types.length !== 0) {
         if (value.types.length === 0) {
-          this.filterResult = this.allPokemons.filter((pokemon) => pokemon.name.toLowerCase().match(value.name));
+          this.filterResult = this.allPokemons.filter((pokemon) => pokemon.name.toLowerCase().match(value.name.toLowerCase()));
         }
         if (value.types.length !== 0) {
           await Promise.all(
@@ -196,7 +196,7 @@ export default {
               await this.getFilterType(type);
             }),
           );
-          this.filterResult = this.typeResult.filter((pokemon) => pokemon.name.toLowerCase().match(value.name));
+          this.filterResult = this.typeResult.filter((pokemon) => pokemon.name.toLowerCase().match(value.name.toLowerCase()));
         }
       } else {
         window.location.reload();
