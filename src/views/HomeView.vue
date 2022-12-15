@@ -32,10 +32,14 @@
         </label>
         <button
           type="button"
-          class="bg-gray-50 hover:bg-emerald-500 ring-2 ring-emerald-500 py-2 px-3 rounded-lg"
+          class="bg-gray-50 hover:bg-emerald-500 ring-2 ring-emerald-500 relative py-2 px-3 rounded-lg"
           @click="openFilter"
         >
           <FilterIcon class="w-5 h-5" />
+          <div
+            v-if="filterResult!== ''"
+            class="w-2 h-2 rounded-full bg-blue-500 absolute top-[-2px] left-[-2px]"
+          />
         </button>
       </div>
       <ModalFilter
