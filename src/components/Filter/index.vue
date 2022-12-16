@@ -52,7 +52,7 @@
                     :id="type.name"
                     v-model="filterTypes"
                     type="checkbox"
-                    :value="type.id"
+                    :value="type.name"
                   >
                   <span class="px-4 py-[4px] text-sm leading-5 font-medium text-white capitalize"> {{ type.name }} </span>
                 </label>
@@ -110,7 +110,11 @@ export default {
       this.$emit('close');
     },
     onSubmit() {
-      this.$emit('inputFilter', this.name);
+      const filterCriteria = {
+        name: this.name,
+        types: this.filterTypes,
+      };
+      this.$emit('inputFilter', filterCriteria);
       this.$emit('close');
     },
   },

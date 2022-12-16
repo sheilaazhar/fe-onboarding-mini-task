@@ -10,7 +10,7 @@
       width="140"
       class="h-auto w-36"
     >
-    <h2 class="mt-2 text-center font-semibold capitalize">
+    <h2 class="mt-2 mb-1 text-center font-semibold capitalize">
       {{ name }}
     </h2>
     <ul class="flex items-center space-x-1">

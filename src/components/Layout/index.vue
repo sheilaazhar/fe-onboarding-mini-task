@@ -1,8 +1,6 @@
 <template>
-  <div class="max-w-lg min-h-screen mx-auto shadow-md">
-    <div class="bg-gray-50">
-      <slot name="content" />
-    </div>
+  <div class="max-w-lg min-h-screen mx-auto shadow-md bg-gray-50">
+    <slot name="content" />
   </div>
 </template>
 
