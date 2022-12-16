@@ -44,6 +44,7 @@
       </div>
       <ModalFilter
         v-show="filterOpen"
+        ref="formFilter"
         @close="closeFilter"
         @inputFilter="handleFilter"
       />
@@ -190,6 +191,8 @@ export default {
     },
     searchName() {
       this.filterResult = '';
+      this.$refs.formFilter.name = '';
+      this.$refs.formFilter.filterTypes = [];
     },
     async handleFilter(value) {
       this.typeResult = [];
