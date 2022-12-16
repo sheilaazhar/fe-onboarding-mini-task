@@ -197,6 +197,7 @@ export default {
     async handleFilter(value) {
       this.typeResult = [];
       this.filterResult = '';
+      this.search = '';
       if (value.name !== '' || value.types.length !== 0) {
         if (value.types.length === 0) {
           this.filterResult = this.allPokemons.filter((pokemon) => pokemon.name.toLowerCase().match(value.name.toLowerCase()));
@@ -218,12 +219,15 @@ export default {
         this.loader = true;
         const response = await axios.get(`${process.env.VUE_APP_API_ENDPOINT}/type/${type}`);
         for (let i = 0; i < response.data.pokemon.length; i += 1) {
-          this.typeResult[i] = {
+          const result = {
             name: response.data.pokemon[i].pokemon.name,
             url: response.data.pokemon[i].pokemon.url,
             types: await this.getType(response.data.pokemon[i].pokemon.url), /* eslint-disable-line no-await-in-loop */
             id: response.data.pokemon[i].pokemon.url.split('/').filter((part) => !!part).pop(),
           };
+          if (!this.typeResult.find(({ id }) => id === result.id)) {
+            this.typeResult.push(result);
+          }
         }
         this.loader = false;
       } catch (err) {
